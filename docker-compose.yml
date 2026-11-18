@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: tasks_prisma_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: nest_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+  app:
+    build: .
+    container_name: nest_app
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password123@db:5432/nest_db?schema=public
+      - PORT=3000
+    depends_on:
+      - db
+    restart: always
+
+volumes:
+  pgdata:

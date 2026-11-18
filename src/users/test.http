@@ -1,0 +1,17 @@
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "username": "evgeny",
+  "email": "evgeny@test.com",
+  "password": "mysecretpassword"
+}
+
+# @name loginRequest
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "username": "evgeny",
+  "password": "mysecretpassword"
+}
